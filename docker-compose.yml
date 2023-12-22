@@ -1,22 +1,15 @@
 version: '3.9'
 services:
-  react:
-    build: ./client
-    # image: node:alpine
-    container_name: react-client
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
     ports:
-      - 3000:3000
-    working_dir: /app
-    depends_on:
-      - node
-      - mongo
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
     networks:
       - node-network
-    volumes:
-      - type: bind
-        source: ./client
-        target: /app
-    tty: true
 
   node:
     build: ./server
@@ -34,15 +27,23 @@ services:
     networks:
       - node-network
 
-  mongo:
-    image: mongo:latest
-    container_name: mongo
+  react:
+    build: ./client
+    # image: node:alpine
+    container_name: react-client
     ports:
-      - 27017:27017
-    volumes:
-      - mongodb:/data/db
+      - 3000:3000
+    working_dir: /app
+    depends_on:
+      - node
+      - mongo
     networks:
       - node-network
+    volumes:
+      - type: bind
+        source: ./client
+        target: /app
+    tty: true
 
 volumes:
   mongodb:
