@@ -2,7 +2,7 @@ version: '3.9'
 services:
   react:
     build: ./client
-    image: node:alpine
+    # image: node:alpine
     container_name: react-client
     ports:
       - 3000:3000
@@ -17,7 +17,6 @@ services:
         source: ./client
         target: /app
     tty: true
-    command: ["yarn", "dev"]
 
   node:
     build: ./server
@@ -25,9 +24,9 @@ services:
     container_name: "node-server"
     working_dir: /src
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/users
+      - MONGO_URI=mongodb://mongo:27017
     ports:
-      - "5050:5050"
+      - 5050:5050
     depends_on:
       - mongo
     volumes:
@@ -37,9 +36,9 @@ services:
 
   mongo:
     image: mongo:latest
-    container_name: mongodb
+    container_name: mongo
     ports:
-      - "27017:27017"
+      - 27017:27017
     volumes:
       - mongodb:/data/db
     networks:

@@ -7,4 +7,4 @@ COPY .  /src
 
 EXPOSE 5050
 
-CMD [ "node", "index.js" ]
+CMD [ "yarn", "start" ]
