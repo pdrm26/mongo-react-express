@@ -1,9 +1,7 @@
 import { ObjectId } from "mongodb";
 
-export default class User {
-  constructor(
-    public name: string,
-    public family: string,
-    public id?: ObjectId
-  ) {}
+export default interface User {
+  name: string;
+  family: string;
+  id?: ObjectId;
 }

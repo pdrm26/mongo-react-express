@@ -1,6 +1,5 @@
 import express, { Express } from "express";
 import cors from "cors";
-import { Error } from "mongoose";
 import { connectToDatabase } from "./services/database";
 import usersRouter from "./routes/users";
 
