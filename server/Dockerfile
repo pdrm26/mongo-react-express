@@ -1,8 +1,8 @@
 FROM node:alpine
 
 WORKDIR /src
-COPY ./package.json /src/
-RUN yarn install --production
+COPY ./package.json ./yarn.lock /src/
+RUN yarn install
 COPY .  /src
 
 EXPOSE 5050
