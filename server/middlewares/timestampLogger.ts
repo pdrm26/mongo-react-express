@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-export default function timestampLoggerMiddleware(
+export default function timestampLogger(
   req: Request,
   res: Response,
   next: NextFunction

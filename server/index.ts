@@ -4,8 +4,8 @@ import { connectToDatabase } from "./services/database";
 import usersRouter from "./routes/users";
 import miscRouter from "./routes/misc";
 import path from "path";
-import timestampLoggerMiddleware from "./middlewares/timestamp";
-import personalizeSignatureMidleware from "./middlewares/personalizeSignatureMidleware";
+import timestampLogger from "./middlewares/timestampLogger";
+import personalizeSignature from "./middlewares/personalizeSignature";
 import errorHandler from "./middlewares/errorHandler";
 import cookieParser from "cookie-parser";
 
@@ -13,8 +13,8 @@ const app: Express = express();
 connectToDatabase()
   .then(() => {
     //Mount the middlewares
-    app.use(timestampLoggerMiddleware);
-    app.use(personalizeSignatureMidleware);
+    app.use(timestampLogger);
+    app.use(personalizeSignature);
     app.use(cors());
     app.use(cookieParser());
     app.use(express.json()); // For parsing JSON data
