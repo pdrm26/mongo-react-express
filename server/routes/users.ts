@@ -7,6 +7,13 @@ import User from "../models/user";
 // Global Config
 const router = express.Router();
 
+//Custom middleware for just this route
+router.use((req, res, next) => {
+  console.log("Request to the users route");
+
+  next();
+});
+
 // GET
 router.get("/", async (req: Request, res: Response) => {
   try {
