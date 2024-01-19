@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { User } from "../types/user";
 
-export default function Home() {
+export default function Users() {
   const [users, setUsers] = useState<User[] | null>(null);
   useEffect(() => {
     fetch("http://localhost:5050/users", {
@@ -12,7 +12,7 @@ export default function Home() {
   }, []);
   return (
     <>
-      {!users && <p>We dont have any users right now.</p>}
+      {users?.length === 0 && <p>We dont have any users right now.</p>}
       {users &&
         users.map((user) => {
           return (
@@ -20,6 +20,7 @@ export default function Home() {
               <li>name: {user.name}</li>
               <li>family: {user.family}</li>
               <li>age: {user.age}</li>
+              <hr />
             </>
           );
         })}
