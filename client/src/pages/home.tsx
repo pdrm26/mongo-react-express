@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { User } from "../types/user";
 
-export default function Users() {
+export default function Home() {
   const [users, setUsers] = useState<User[] | null>(null);
   useEffect(() => {
     fetch("http://localhost:5050/users", {
