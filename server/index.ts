@@ -8,6 +8,7 @@ import timestampLogger from "./middlewares/timestampLogger";
 import personalizeSignature from "./middlewares/personalizeSignature";
 import errorHandler from "./middlewares/errorHandler";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 
 const app: Express = express();
 connectToDatabase()
@@ -20,6 +21,15 @@ connectToDatabase()
     app.use(express.json()); // For parsing JSON data
     app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded form data
     app.use("/static", express.static(path.join(__dirname, "public"))); // Serving static assets from the 'public' folder
+    app.use(
+      session({ // with default save the memory which is not safe, save them to redis
+        secret: "thisismysecrctekey",
+        saveUninitialized: true,
+        cookie: { maxAge: 1000 }, // just 1s (;
+        resave: false,
+        name: "cookie-name"
+      }),
+    );
 
     // Mount the routes
     app.use("/users", usersRouter);
